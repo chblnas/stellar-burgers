@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { useDispatch } from '@store';
 import { fetchIngredients } from '@slices/ingredients/ingredientsSlice';
 import { fetchUser } from '@slices/user/userSlice';
+import { clearOrderData } from '@slices/order/orderSlice';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
   }, [dispatch]);
 
   const handleModalClose = () => {
+    dispatch(clearOrderData());
     navigate(-1);
   };
 
@@ -40,7 +42,7 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
 
-      <Routes location={backgroundLocation}>
+      <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
