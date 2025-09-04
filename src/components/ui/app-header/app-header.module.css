@@ -17,7 +17,15 @@
 .link {
   display: flex;
   text-decoration: none;
+  align-items: center;
   color: var(--text-inactive-color);
+  padding: 16px 20px;
+  border-radius: 40px;
+  transition: box-shadow .2s;
+}
+
+.link:hover {
+  box-shadow: 0 0 10px hsla(0,0%,100%,.5);
 }
 
 .link_active {

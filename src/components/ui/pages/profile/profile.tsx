@@ -6,7 +6,7 @@ import commonStyles from '../common.module.css';
 
 import { ProfileUIProps } from './type';
 import { ProfileMenu } from '@components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@store';
 import { selectUserIsLoading } from '@slices/user/userSlice';
 import { Preloader } from '@ui';
 

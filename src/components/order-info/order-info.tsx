@@ -3,8 +3,15 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '@store';
-import { selectIngredients } from '@slices/ingredients/ingredientsSlice';
-import { fetchOrder, selectOrderDataByNumber } from '@slices/order/orderSlice';
+import {
+  selectIngredients,
+  selectIngredientsIsLoading
+} from '@slices/ingredients/ingredientsSlice';
+import {
+  fetchOrder,
+  selectOrderDataByNumber,
+  selectOrderRequestByNumber
+} from '@slices/order/orderSlice';
 import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
@@ -12,7 +19,10 @@ export const OrderInfo: FC = () => {
   const { number } = useParams();
 
   const orderData = useSelector(selectOrderDataByNumber);
+  const isOrderLoading = useSelector(selectOrderRequestByNumber);
+
   const ingredients: TIngredient[] = useSelector(selectIngredients);
+  const isIngredientsLoading = useSelector(selectIngredientsIsLoading);
 
   useEffect(() => {
     dispatch(fetchOrder(Number(number)));
@@ -60,9 +70,9 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (isIngredientsLoading || isOrderLoading) {
     return <Preloader />;
   }
 
-  return <OrderInfoUI orderInfo={orderInfo} />;
+  return orderInfo && <OrderInfoUI orderInfo={orderInfo} />;
 };
