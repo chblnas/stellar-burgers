@@ -21,7 +21,7 @@ interface TOrderState {
   ordersError: SerializedError | null;
 }
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   newOrderData: null,
   isNewOrderLoading: false,
   newOrderError: null,

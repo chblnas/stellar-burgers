@@ -7,13 +7,13 @@ import {
 import { FEED_SLICE_NAME } from '@slices/sliceNames';
 import { TOrdersData } from '@utils-types';
 
-interface TFeedState {
+export interface TFeedState {
   data: TOrdersData;
   isLoading: boolean;
   error: SerializedError | null;
 }
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   data: {
     orders: [],
     total: 0,
